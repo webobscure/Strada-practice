@@ -1,0 +1,29 @@
+{
+    "users" : [
+        {
+            "firstname" : "Elon",
+            "lastName" : "Musk",
+            "dateOfBirth": "June 29, 1971",
+            "knowsAs" : "CEO of Tesla, SpaceX"
+        },
+        {
+            "firstname" : "Steve",
+            "lastName" : "Jobs",
+            "dateOfBirth": "February 24, 1955",
+            "knowsAs" : "co-founder of Apple Inc, Next, Pixar"
+        },
+        {
+            "firstname" : "Walt",
+            "lastName" : "Disney",
+            "dateOfBirth": "December 5, 1901",
+            "knowsAs" : "founed of Walt Disney Productions"
+        },
+        {
+            "firstname" : "Tim",
+            "lastName" : "Cook",
+            "dateOfBirth": "November 1, 1960",
+            "knowsAs" : "manager and CEO of Apple Inc"
+        }
+
+    ]
+}
