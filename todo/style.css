@@ -1,11 +1,5 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-input[type=text]::placeholder {
-    color: #bbb;
+input[type=text]::placeholder { 
+    color:#bbb;
     font-family: Roboto, sans-serif;
     font-size: 18px;
     line-height: 21px;
@@ -14,10 +8,17 @@ input[type=text]::placeholder {
 input[type=text] {
     font-family: Roboto, sans-serif;
     font-size: 18px;
-    outline: none;
+    outline:none;
     border: none;
     width: 399px;
-    margin-right: 18px;
+    margin-right:18px;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .container {
@@ -49,7 +50,7 @@ ul {
     padding: 25px 8px;
 }
 
-fieldset {
+fieldset { 
     border: 0;
     width: 100%;
 
@@ -69,15 +70,16 @@ form {
 }
 
 p {
-    margin-left: 12px;
+    padding-left: 33px;
     text-align: start;
     width: 370px;
     display: inline-block;
     overflow: hidden;
+    padding-left: 33px;
 }
 
 .btn_add {
-    background: url(assets/add-icon.svg);
+    background:url(assets/add-icon.svg);
     background-repeat: no-repeat;
     background-size: cover;
     margin-left: auto;
@@ -88,7 +90,7 @@ p {
 }
 
 .btn_exit {
-    background: url(assets/close-icon.svg);
+    background:url(assets/close-icon.svg);
     background-repeat: no-repeat;
     background-size: cover;
     margin-left: auto;
@@ -109,26 +111,30 @@ li:not(:first-child) label {
     display: flex;
 }
 
-li:not(:first-child) label::before {
+.task_name::before {
     content: '';
     display: inline-block;
     width: 21px;
     height: 21px;
     border: 1px solid #998899;
     border-radius: 50%;
+    vertical-align: middle;
+    position: absolute;
+    margin-left: -33px;
 }
 
 
-input[type=checkbox]:checked+label::before {
+input[type=checkbox]:checked + .task_name::before { 
     border: 1px solid #998899;
     border-radius: 50%;
     width: 21px;
     height: 21px;
     background-color: #C4C4C4;
     box-shadow: inset 0 0 0 2px #fff;
+
 }
 
-.done_task_high {
+.status_done {
     background-color: #F4F4F4;
 }
 
