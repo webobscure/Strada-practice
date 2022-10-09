@@ -17,25 +17,23 @@ const ELEMENTS = {
     if (!cityName || !isNaN(cityName)) {
       alert('Enter a correct city');
     } else {
-      changeCity(urlTemperature);
-      changeTemperatureIcon(urlTemperature);
+      changeNow(urlTemperature);
     }
   }
-  function changeCity(urlTemperature) {
+  function changeNow(urlTemperature) {
     fetch(urlTemperature)
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('data not received from the server');
+        }
+        return response.json();
+      })
       .then((result) => {
         ELEMENTS.CITY_NOW.textContent = result.name;
-      });
-  }
-  
-  function changeTemperatureIcon(urlTemperature) {
-    fetch(urlTemperature)
-      .then((response) => response.json())
-      .then((result) => {
         ELEMENTS.TEMPERATURE.textContent = Math.round(result.main.temp) + '°';
         let iconCode = result.weather[0].icon;
         let urlWeather = ` https://openweathermap.org/img/wn/${iconCode}@2x.png`;
         ELEMENTS.ICON_NOW.src = urlWeather;
-      });
-  }
+      })
+      .catch(alert);
+    }
