@@ -83,30 +83,19 @@ body {
   margin-left: 23px;
   position: relative;
 }
-/* .now__temperature::before {
-  content: '';
-  background-image: url('/img/circle.svg');
-  position: absolute;
-  left: 81px;
-  top: 35px;
-  width: 13px;
-  height: 13px;
-  background-size: 13px 13px;
-} */
 .now__city {
   margin-top: 197px;
   margin-left: 17px;
   position: relative;
+  display: flex;
+  justify-content: space-between;
 }
-.now__city::before {
-  content: '';
-  background-image: url('/img/heart.svg');
-  position: absolute;
-  left: 233px;
-  top: 3px;
-  width: 22px;
-  height: 22px;
-  background-size: 22px 22px;
+.now__heart {
+  margin-right: 20px;
+}
+.now__heart img {
+  width: 25px;
+  height: 25px;
 }
 /* details */
 .details {
@@ -124,32 +113,6 @@ body {
   display: flex;
   flex-direction: column;
   row-gap: 15px;
-}
-.details__list-item:nth-child(1) {
-  position: relative;
-}
-.details__list-item:nth-child(1)::before {
-  content: '';
-  background-image: url('/img/circle.svg');
-  position: absolute;
-  left: 177px;
-  top: 6px;
-  width: 6px;
-  height: 6px;
-  background-size: 6px 6px;
-}
-.details__list-item:nth-child(2) {
-  position: relative;
-}
-.details__list-item:nth-child(2)::before {
-  content: '';
-  background-image: url('/img/circle.svg');
-  position: absolute;
-  left: 141px;
-  top: 6px;
-  width: 6px;
-  height: 6px;
-  background-size: 6px 6px;
 }
 
 /* forecast */
@@ -185,32 +148,6 @@ body {
   margin-top: 38px;
   display: flex;
   flex-direction: column;
-}
-.forecast__temperature span:nth-child(1) {
-  position: relative;
-}
-.forecast__temperature span:nth-child(1)::before {
-  content: '';
-  background-image: url('/img/circle.svg');
-  position: absolute;
-  left: 133px;
-  top: 4px;
-  width: 6px;
-  height: 6px;
-  background-size: 6px 6px;
-}
-.forecast__temperature span:nth-child(2) {
-  position: relative;
-}
-.forecast__temperature span:nth-child(2)::before {
-  content: '';
-  background-image: url('/img/circle.svg');
-  position: absolute;
-  left: 106px;
-  top: 4px;
-  width: 6px;
-  height: 6px;
-  background-size: 6px 6px;
 }
 .forecast__icon {
   margin-top: 34px;
@@ -273,4 +210,19 @@ body {
   display: flex;
   flex-direction: column;
   row-gap: 15px;
+  overflow: auto;
+  height: 291px;
+}
+.list-item {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.locations__delete {
+  color: #807777;
+  font-weight: 100;
+  font-size: 25px;
+  cursor: pointer;
+  padding-right: 10px;
 }
