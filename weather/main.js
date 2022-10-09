@@ -10,6 +10,12 @@ const ELEMENTS = {
     NOW_CITY_NAME: document.querySelector('.now__city-name'),
     LIST_CITY: document.querySelectorAll('.list-item'),
     BODY: document.body,
+    DETAILS_CITY: document.querySelector('.details__city'),
+    DETAILS_TEMPERATURE: document.querySelector('#details__temperature'),
+    DETAILS_FEELS_LIKE: document.querySelector('#details__feels-like'),
+    DETAILS_WEATHER: document.querySelector('#details__feels-weather'),
+    DETAILS_SUNRISE: document.querySelector('#details__sunrise'),
+    DETAILS_SUNSET: document.querySelector('#details__sunset'),
   };
   const serverUrl = 'http://api.openweathermap.org/data/2.5/weather';
   const apiKey = 'f660a2fb1e4bad108d6160b7f58c555f';
@@ -27,6 +33,7 @@ const ELEMENTS = {
       alert('Enter a correct city');
     } else {
       changeNow(url);
+      changeDetails(url);
     }
   }
   
@@ -87,6 +94,7 @@ const ELEMENTS = {
     currentCity = JSON.parse(currentCity);
     let url = `${serverUrl}?q=${currentCity}&appid=${apiKey}&units=metric`;
     changeNow(url);
+    changeDetails(url);
   }
   
   function renderLocation(cityes) {
@@ -109,6 +117,7 @@ const ELEMENTS = {
       li.addEventListener('click', () => {
         let url = `${serverUrl}?q=${p.textContent}&appid=${apiKey}&units=metric`;
         changeNow(url);
+        changeDetails(url);
         localStorage.setItem('currentCity', JSON.stringify(p.textContent));
         getLocalStorageCurrentCity();
       });
@@ -119,4 +128,29 @@ const ELEMENTS = {
         li.remove();
       });
     });
+  }
+  
+  function changeDetails(url) {
+    fetch(url)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('data not received from the server');
+        }
+        return response.json();
+      })
+      .then((result) => {
+        ELEMENTS.DETAILS_CITY.textContent = result.name;
+        ELEMENTS.DETAILS_TEMPERATURE.textContent =
+          'Temperature: ' + Math.round(result.main.temp) + '°';
+        ELEMENTS.DETAILS_FEELS_LIKE.textContent =
+          'Feels like: ' + Math.round(result.main.feels_like) + '°';
+        ELEMENTS.DETAILS_WEATHER.textContent = 'Weather: ' + result.weather[0].main;
+        let sunrise = new Date(result.sys.sunrise * 1000);
+        sunrise = sunrise.toLocaleTimeString();
+        ELEMENTS.DETAILS_SUNRISE.textContent = 'Sunrise: ' + sunrise.slice(0, -3);
+        let sunset = new Date(result.sys.sunset * 1000);
+        sunset = sunset.toLocaleTimeString();
+        ELEMENTS.DETAILS_SUNSET.textContent = 'Sunset: ' + sunset.slice(0, -3);
+      })
+      .catch(alert);
   }

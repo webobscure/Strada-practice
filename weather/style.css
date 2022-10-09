@@ -97,6 +97,11 @@ body {
   width: 25px;
   height: 25px;
 }
+.now__city-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 /* details */
 .details {
   padding-top: 33px;
