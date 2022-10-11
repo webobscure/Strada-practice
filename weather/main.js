@@ -1,5 +1,9 @@
 import { ELEMENTS, serverUrl, apiKey } from './value.js';
 
+const favoriteCities = new Set()
+favoriteCities.add(CITY)
+JSON.stringify([...favoriteCities])
+
 let CITY = ['Amur', 'Samara', 'Bali'];
 
 ELEMENTS.BTN.addEventListener('click', function (event) {
