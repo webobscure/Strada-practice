@@ -103,7 +103,6 @@ function changeStatus(task) {
     alert(`Ошибка: ${err.message}`);
   }
 }
-
 // Page update
 
 function render() {
