@@ -1,147 +1,163 @@
 const ELEMENTS = {
-    addTaskHigh : document.querySelector('.add_task_high'),
-    addTaskLow : document.querySelector('.add_task_low'),
-    highInput : document.querySelector('.high_input'),
-    lowInput : document.querySelector('.low_input'),
-    listHigh : document.querySelector('.list_high'),
-    listLow : document.querySelector('.list_low')
-}
+  addTaskHigh: document.querySelector('.add_task_high'),
+  addTaskLow: document.querySelector('.add_task_low'),
+  highInput: document.querySelector('.high_input'),
+  lowInput: document.querySelector('.low_input'),
+  listHigh: document.querySelector('.list_high'),
+  listLow: document.querySelector('.list_low'),
+};
 
 const PRIORITY = {
-    high: 'high',
-    low: 'low',
-}
+  high: 'high',
+  low: 'low',
+};
 
 const STATUS = {
-    toDo : 'status_todo',
-    done : 'status_done',
-}
+  toDo: 'status_todo',
+  done: 'status_done',
+};
 
-
-const list = [ 
-                new Task('Изучить новую тему', PRIORITY.high),
-                new Task('Сверстать этот TODO list', PRIORITY.high),
-                new Task('Продолжить разработку приложения по погоде', PRIORITY.high),
-                new Task('Готовиться к классовым компонентам', PRIORITY.high)
-]
-
+const list = [
+  new Task('Изучить новую тему', PRIORITY.high),
+  new Task('Сверстать этот TODO list', PRIORITY.high),
+  new Task('Продолжить разработку приложения по погоде', PRIORITY.high),
+  new Task('Готовиться к классовым компонентам', PRIORITY.high),
+];
 
 // Add new task
 
 function Task(name, priority) {
-    this.name = name
-    this.priority = priority
-    this.status = STATUS.toDo
+  this.name = name;
+  this.priority = priority;
+  this.status = STATUS.toDo;
 }
 
-function addTask (event, newTask, priority) {
-    try {
-        if(newTask.value.trim() != '' && list.findIndex (function (item) {return item.name == newTask.value; }) == -1) {
-            list.push({'name': newTask.value, 'priority': priority, 'status' : STATUS.toDo});
-        };
+function addTask(event, newTask, priority) {
+  try {
+    if (
+      newTask.value.trim() != '' &&
+      list.findIndex(function (item) {
+        return item.name == newTask.value;
+      }) == -1
+    ) {
+      list.push({ name: newTask.value, priority: priority, status: STATUS.toDo });
+    }
     event.preventDefault();
     newTask.value = '';
     render();
-    } catch(err) {
-        alert(`Ошибка: ${err.message}`);
-    };
-};
+  } catch (err) {
+    alert(`Ошибка: ${err.message}`);
+  }
+}
 
 // Add listener for addTask
 
-ELEMENTS.highInput.addEventListener('submit', (event)=> {
-    addTask(event, ELEMENTS.addTaskHigh, PRIORITY.high);  
+ELEMENTS.highInput.addEventListener('submit', (event) => {
+  addTask(event, ELEMENTS.addTaskHigh, PRIORITY.high);
 });
 
-ELEMENTS.lowInput.addEventListener('submit', (event)=> {
-    addTask(event, ELEMENTS.addTaskLow, PRIORITY.low);
+ELEMENTS.lowInput.addEventListener('submit', (event) => {
+  addTask(event, ELEMENTS.addTaskLow, PRIORITY.low);
 });
-
 
 // Remove selected task
 
 function deleteTask(task) {
-    try{
-    if(list.findIndex (function (item) {return item.name ===  task; }) !== -1) {
-        let deleteItem = list.findIndex(function (item) {
-            return item.name === task;  
-        });
-        list.splice(deleteItem, 1);
-    };
+  try {
+    if (
+      list.findIndex(function (item) {
+        return item.name === task;
+      }) !== -1
+    ) {
+      let deleteItem = list.findIndex(function (item) {
+        return item.name === task;
+      });
+      list.splice(deleteItem, 1);
+    }
     render();
-    }catch(err){
-        alert(`Ошибка: ${err.message}`);
-    };
-};
-
+  } catch (err) {
+    alert(`Ошибка: ${err.message}`);
+  }
+}
 
 // Change task status
 
-function changeStatus(task) { 
-    try{
-    if(list.findIndex (function (item) {return item.name ===  task; }) !== -1) {
-        let changeIndex = list.find(function (item) {
-            return (item.name == task); 
-        });
-        if(changeIndex.status == STATUS.toDo){
-         changeIndex.status = STATUS.done;
-        } else {
-            changeIndex.status = STATUS.toDo; 
-        }
+function changeStatus(task) {
+  try {
+    if (
+      list.findIndex(function (item) {
+        return item.name === task;
+      }) !== -1
+    ) {
+      let changeIndex = list.find(function (item) {
+        return item.name == task;
+      });
+      if (changeIndex.status == STATUS.toDo) {
+        changeIndex.status = STATUS.done;
+      } else {
+        changeIndex.status = STATUS.toDo;
+      }
     }
     render();
-    }catch(err) {
-        alert(`Ошибка: ${err.message}`);
-    };
-};
+  } catch (err) {
+    alert(`Ошибка: ${err.message}`);
+  }
+}
 
 // Page update
 
-function render () {
-    try{
+function render() {
+  try {
     let delTasks = document.querySelectorAll('.task_todo');
     delTasks.forEach((item) => {
-        item.remove();
+      item.remove();
     });
 
-   for (let item of list) {
-        
-    if(item.priority === PRIORITY.high) {
-    ELEMENTS.listHigh.insertAdjacentHTML('beforeend', 
-    `<li class="task_todo">
+    for (let item of list) {
+      if (item.priority === PRIORITY.high) {
+        ELEMENTS.listHigh.insertAdjacentHTML(
+          'beforeend',
+          `<li class="task_todo">
     <label>
-    <input type="checkbox" name="to_do" onclick = 'changeStatus("${item.name}")' ${(item.status == STATUS.done) ? 'checked' : ''}>
+    <input type="checkbox" name="to_do" onclick = 'changeStatus("${item.name}")' ${
+            item.status == STATUS.done ? 'checked' : ''
+          }>
       <p class="task_name">
         ${item.name}
       </p>
     </label>
       <button class="btn_exit" type="button" onclick = 'deleteTask("${item.name}")'></button>
-    </li>`
-     )};
-    
-    if(item.priority === PRIORITY.low) {
-    ELEMENTS.listLow.insertAdjacentHTML('beforeend', 
-    `<li class="task_todo">
+    </li>`,
+        );
+      }
+
+      if (item.priority === PRIORITY.low) {
+        ELEMENTS.listLow.insertAdjacentHTML(
+          'beforeend',
+          `<li class="task_todo">
       <label>
-        <input type="checkbox" name="to_do" onclick = 'changeStatus("${item.name}")' ${(item.status == STATUS.done) ? 'checked' : ''}>
+        <input type="checkbox" name="to_do" onclick = 'changeStatus("${item.name}")' ${
+            item.status == STATUS.done ? 'checked' : ''
+          }>
           <p class="task_name">
             ${item.name}
           </p>
       </label>
         <button class="btn_exit" type="button" onclick = 'deleteTask("${item.name}")'></button>
-    </li>`
-    )};
-    };
+    </li>`,
+        );
+      }
+    }
 
-for (let item of document.querySelectorAll('input[type=checkbox]')) {
-    if (item.checked) {
+    for (let item of document.querySelectorAll('input[type=checkbox]')) {
+      if (item.checked) {
         let li = item.parentNode.parentNode;
         li.classList.add('status_done');
+      }
+    }
+  } catch (err) {
+    alert(`Ошибка: ${err.message}`);
+  }
 }
-}
-    }catch(err){
-        alert(`Ошибка: ${err.message}`);
-    };
-};
 
 render();

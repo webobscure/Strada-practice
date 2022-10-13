@@ -1,5 +1,5 @@
-input[type=text]::placeholder { 
-    color:#bbb;
+input[type=text]::placeholder {
+    color: #bbb;
     font-family: Roboto, sans-serif;
     font-size: 18px;
     line-height: 21px;
@@ -8,10 +8,10 @@ input[type=text]::placeholder {
 input[type=text] {
     font-family: Roboto, sans-serif;
     font-size: 18px;
-    outline:none;
+    outline: none;
     border: none;
     width: 399px;
-    margin-right:18px;
+    margin-right: 18px;
 }
 
 
@@ -50,7 +50,7 @@ ul {
     padding: 25px 8px;
 }
 
-fieldset { 
+fieldset {
     border: 0;
     width: 100%;
 
@@ -79,7 +79,7 @@ p {
 }
 
 .btn_add {
-    background:url(assets/add-icon.svg);
+    background: url(assets/add-icon.svg);
     background-repeat: no-repeat;
     background-size: cover;
     margin-left: auto;
@@ -90,7 +90,7 @@ p {
 }
 
 .btn_exit {
-    background:url(assets/close-icon.svg);
+    background: url(assets/close-icon.svg);
     background-repeat: no-repeat;
     background-size: cover;
     margin-left: auto;
@@ -124,7 +124,7 @@ li:not(:first-child) label {
 }
 
 
-input[type=checkbox]:checked + .task_name::before { 
+input[type=checkbox]:checked+.task_name::before {
     border: 1px solid #998899;
     border-radius: 50%;
     width: 21px;
