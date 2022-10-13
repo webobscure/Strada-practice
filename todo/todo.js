@@ -18,13 +18,21 @@ const STATUS = {
 }
 
 
-const list = [ { name: 'Изучить новую тему', priority: PRIORITY.high, status: STATUS.toDo},
-               { name: 'Сверстать этот TODO list', priority: PRIORITY.high, status: STATUS.toDo},
-               { name: 'Начать делать задачу', priority: PRIORITY.high, status: STATUS.toDo},
-               { name: 'Посмотреть ютубчик', priority: PRIORITY.low, status: STATUS.toDo},];
+const list = [ 
+                new Task('Изучить новую тему', PRIORITY.high),
+                new Task('Сверстать этот TODO list', PRIORITY.high),
+                new Task('Продолжить разработку приложения по погоде', PRIORITY.high),
+                new Task('Готовиться к классовым компонентам', PRIORITY.high)
+]
 
 
 // Add new task
+
+function Task(name, priority) {
+    this.name = name
+    this.priority = priority
+    this.status = STATUS.toDo
+}
 
 function addTask (event, newTask, priority) {
     try {
