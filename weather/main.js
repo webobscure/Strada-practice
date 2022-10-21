@@ -22,27 +22,37 @@ function checkCityName(cityName, url) {
     alert('Enter a correct city');
     return;
   } else {
-    changeNow(url);
+    checkUrl(url);
     changeDetails(url);
   }
 }
 
-function changeNow(url) {
-  fetch(url)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error('data not received from the server');
-      }
-      return response.json();
-    })
-    .then((result) => {
-      ELEMENTS.NOW_CITY_NAME.textContent = result.name;
-      ELEMENTS.TEMPERATURE.textContent = Math.round(result.main.temp) + '°';
-      let iconCode = result.weather[0].icon;
-      let urlWeather = ` https://openweathermap.org/img/wn/${iconCode}@2x.png`;
-      ELEMENTS.ICON_NOW.src = urlWeather;
-    })
-    .catch(alert);
+async function checkUrl(url) {
+  try {
+    let response = await fetch(url);
+    if(!response.ok) {
+      throw new ServerError('data not received from the server');
+    }
+    let result = await response.json();
+    changeDetails(result);
+    changeNow(result);
+  } catch (err) {
+    if (err instanceof ServerError) {
+      alert(err.message)
+    } else {
+      throw new ServerError
+    }
+  }
+}
+
+async function change
+
+function changeNow(result) {
+  ELEMENTS.NOW_CITY_NAME.textContent = result.name;
+  ELEMENTS.TEMPERATURE.textContent = Math.round(result.main.temp) + '°';
+  let iconCode = result.weather[0].icon;
+  let urlWeather = ` https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+  ELEMENTS.ICON_NOW.src = urlWeather;
 }
 
 ELEMENTS.BODY.onload = function () {
