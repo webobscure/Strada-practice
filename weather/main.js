@@ -1,13 +1,17 @@
-import { ELEMENTS, serverUrl, apiKey } from './value.js';
+import { ELEMENTS, serverUrl, apiKey, mounths, urlForecast } from './value.js';
 
-const favoriteCities = new Set()
-favoriteCities.add(CITY)
-JSON.stringify([...favoriteCities])
+let city = new Set(['Moscow', 'New York', 'San Diego'])
 
-let CITY = ['Amur', 'Samara', 'Bali'];
+class ServerError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = 'ValidationError';
+  }
+}
 
 ELEMENTS.BTN.addEventListener('click', function (event) {
   event.preventDefault();
+
   let cityName = ELEMENTS.INPUT.value;
   let url = `${serverUrl}?q=${cityName}&appid=${apiKey}&units=metric`;
   checkCityName(cityName, url);
@@ -16,6 +20,7 @@ ELEMENTS.BTN.addEventListener('click', function (event) {
 function checkCityName(cityName, url) {
   if (!cityName || !isNaN(cityName)) {
     alert('Enter a correct city');
+    return;
   } else {
     changeNow(url);
     changeDetails(url);
