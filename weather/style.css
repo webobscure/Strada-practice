@@ -1,4 +1,4 @@
-@import url('/reset.css');
+@import url('./reset.css');
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 body {
   font-family: 'Roboto';
@@ -160,7 +160,7 @@ body {
 }
 .forecast__icon::before {
   content: '';
-  background-image: url('/img/rain.svg');
+  background-image: url('/assets/rain.svg');
   position: absolute;
   right: 3px;
   top: 20px;
